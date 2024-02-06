@@ -8,8 +8,12 @@
  * AUTHOR: unknown
  * REVISED: 02/23/12 Blaise Barney
 ***************************************************************************/
+#include <iostream> 
 #include <stdio.h>
 #include <stdlib.h>
+#include "mpi.h" 
+
+using namespace std; 
 
 void srandom (unsigned seed);  
 double dboard (int darts);
@@ -17,8 +21,17 @@ double dboard (int darts);
 #define DARTS 10000   	/* number of throws at dartboard */
 #define ROUNDS 100    	/* number of times "darts" is iterated */
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
+
+int numtasks, rank; 
+double start_time, end_time; 
+
+MPI_Init(&argc, &argv); 
+MPI_Comm_size(MPI_COMM_WORLD, &numtasks); 
+MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+
+start_time = MPI_Wtime();
+
 double pi;          	/* average of pi after "darts" is thrown */
 double avepi;       	/* average pi value for all iterations */
 int i, n;
@@ -26,6 +39,7 @@ int i, n;
 printf("Starting serial version of pi calculation using dartboard algorithm...\n");
 srandom (5);            /* seed the random number generator */
 avepi = 0;
+
 for (i = 0; i < ROUNDS; i++) {
    /* Perform pi calculation on serial processor */
    pi = dboard(DARTS);
@@ -33,7 +47,15 @@ for (i = 0; i < ROUNDS; i++) {
    printf("   After %3d throws, average value of pi = %10.8f\n",
          (DARTS * (i + 1)),avepi);
    }    
+   
 printf("\nReal value of PI: 3.1415926535897 \n");
+
+end_time = MPI_Wtime();
+
+
+cout << "Runtime: " <<  end_time - start_time << endl; 
+
+MPI_Finalize(); 
 }
 
 

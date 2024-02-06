@@ -15,8 +15,6 @@ These are highly relevant to MPI grammar, so first do section 3 & 4.
 
 ## 1.3
 
-
-
 ## 1.4
 
 ## 1.5
@@ -76,4 +74,28 @@ Process 0 on czk123.dhcp.egr.msu.edu out of 4
 
 # Part 4
 
-## 
+## 4.1 Solution
+
+We are able to run the file and get digits for pi.  
+
+## 4.2 Solution 
+
+### 1 Rank: 
+    0.0288078 seconds 
+    
+### 2 Ranks: 
+    0.0273271 seconds
+    0.0272933 seconds
+    
+### 3 Ranks: 
+    0.0275971
+    0.0276003
+    0.0275888
+    
+### 4 Ranks: 
+    0.0273617
+    0.0274038
+    0.027383
+    0.0273332
+    
+Regardless of how many ranks we have the total runtime of the program is about ~ 0.027 seconds. However, each rank takes 0.27 seconds so as we had more ranks we are not adding any "wall_clock" time but we are adding to the computational time. 
