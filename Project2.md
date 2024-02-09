@@ -99,3 +99,14 @@ We are able to run the file and get digits for pi.
     0.0273332
     
 Regardless of how many ranks we have the total runtime of the program is about ~ 0.027 seconds. However, each rank takes 0.27 seconds so as we had more ranks we are not adding any "wall_clock" time but we are adding to the computational time. 
+
+## 4.3 Solution 
+We have used MPI_REDUCE to sum all the averages from each rank (and divided by total ranks to get the final average). See [ser_pi_calc_43.cpp](./ser_pi_calc_43.cpp) for code. 
+
+For size 1, max elapsed time is 0.026849
+For size 2, max elapsed time: 0.013629
+For size 3, max elapsed time: 0.009136
+For size 4, max elapsed time: 0.007189
+
+Since the ROUNDS are being divided further and further in each rank while each rank runs parallel, the run time is decreasing with increase in the number of processes. However, this decrease is not linear.
+
