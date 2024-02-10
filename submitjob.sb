@@ -1,20 +1,45 @@
 #!/bin/bash
-########## Define Resources Needed with SBATCH Lines ##########
- 
-#SBATCH --time=00:10:00             # limit of wall clock time - how long the job will run (same as -t)
-#SBATCH --ntasks=4                  # number of tasks - how many tasks (nodes) that you require (same as -n)
-#SBATCH --cpus-per-task=1           # number of CPUs (or cores) per task (same as -c)
-#SBATCH --mem=2G                    # memory required per node - amount of memory (in bytes)
-#SBATCH --job-name Name_of_Job      # you can give your job a name for easier identification (same as -J)
- 
  
 ########## Command Lines to Run ##########
 
+job_directory=$PWD
+
+#for i in {0..73}
+for i in 1 2 4 8 16 32 64
+
+do
+
+job_file="${job_directory}/Print_${i}.sh"
+
+echo "#!/bin/bash
+   
+########## Define Resources Needed with SBATCH Lines ##########
+#SBATCH --job-name=${i}_Printing
+#SBATCH --time=01:10:00
+#SBATCH --mem=10G
+#SBATCH --nodes=1          
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=${i}
+#SBATCH --output=.out/Darts_1e9_${i}.out
+#SBATCH --error=.error/Darts_1e9_${i}.err
+    
 module purge
-module load gcc/7.3.0-2.30 openmpi hdf5 python git
-  
-cd $SLURM_SUBMIT_DIR                   ### change to the directory where your code is located
- 
-srun -n 4 a.out             ### call your executable
- 
-scontrol show job $SLURM_JOB_ID     ### write job information to output file
+module load intel/2021a
+
+#module purge
+#module load gcc/7.3.0-2.30 openmpi hdf5 python git
+
+#srun -c $i pi_43.out
+mpiexec -n $i ./pi_43.out
+
+#scontrol show job $SLURM_JOB_ID
+" > $job_file 
+
+    echo "$i"
+
+    job_id=$(sbatch --parsable $job_file)
+    echo $job_id >> "jobs.txt"
+    
+    rm $job_file
+        
+done

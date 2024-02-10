@@ -7,9 +7,6 @@
  *   page 207.  
  * AUTHOR: unknown
  * REVISED: 02/23/12 Blaise Barney
- * 
- * Sunia: Made edits to divide ROUNDS in ranks and use MPI_REDUCE to 
- * average the averages of pi from each rank. 
 ***************************************************************************/
 #include <iostream> 
 #include <stdio.h>
@@ -21,8 +18,8 @@ using namespace std;
 void srandom (unsigned seed);  
 double dboard (int darts);
 
-#define DARTS 10000   	/* number of throws at dartboard */
 #define ROUNDS 100    	/* number of times "darts" is iterated */
+const int long DARTS = 1000000;
 
 int main(int argc, char *argv[]){
 
@@ -61,7 +58,7 @@ MPI_Reduce(&elapsed, &max_elapsed, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
 MPI_Reduce(&avepi, &sum_all_pi, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 
 if (rank == 0) {
-    printf("Calculated pi = %f \n", sum_all_pi / numtasks);
+    printf("Calculated pi = %10.13f \n", sum_all_pi / numtasks);
     printf("Elapsed time = %f", max_elapsed);
     printf("\nReal value of PI: 3.1415926535897 \n");
 }
