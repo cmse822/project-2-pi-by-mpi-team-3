@@ -139,13 +139,13 @@ Number of darts and ranks were changed while keeping track of pi and runtimes.
 | 64 | 0.000136 | 0.097750 | 63.154963   |
 
 ## 4.5 Solution
-See figure \ref{errors} for the log-log scaled plot for percentage errors vs DARTS.
+See figure below for the log-log scaled plot for percentage errors vs DARTS.
 ![\label{errors}](error.png)
 
 ## 4.6 Solution
-See figure \ref{time} for the plot for time vs cores.
-![\label{time}](time.png)
+See figure below for the plot for time vs cores.
+![\label{time}](time_normal.png)
 
-See figure \ref{time_log} for the semilog-plot for time vs cores along with the ideal line.
+See figure below for the semilog-plot for time vs cores along with the ideal line.
 ![\label{time_log}](time_log_ideal.png)
 
