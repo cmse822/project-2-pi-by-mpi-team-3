@@ -113,3 +113,39 @@ For size 4, max elapsed time: 0.007189.
 
 Since the ROUNDS are being divided further and further in each rank while each rank runs parallel, the run time is decreasing with increase in the number of processes. However, this decrease is not linear.
 
+## 4.4 Solution
+Number of darts and ranks were changed while keeping track of pi and runtimes. 
+
+### Computed values of pi
+|    | 1.00E+03    | 1.00E+06    | 1.00E+09    |
+| -- | ----------- | ----------- | ----------- |
+| 1  | 3.143760000 | 3.141744840 | 3.141590588 |
+| 2  | 3.143440000 | 3.142053600 | 3.141594685 |
+| 4  | 3.141960000 | 3.141928240 | 3.141585937 |
+| 8  | 3.147217949 | 3.141479949 | 3.141572884 |
+| 16 | 3.139291667 | 3.141478571 | 3.141571213 |
+| 32 | 3.142177083 | 3.141581157 | 3.141581157 |
+| 64 | 3.140093750 | 3.141592581 | 3.141592581 |
+
+### Runtimes for each
+|    | 1.00E+03 | 1.00E+06 | 1.00E+09    |
+| -- | -------- | -------- | ----------- |
+| 1  | 0.016388 | 4.594947 | 3844.827927 |
+| 2  | 0.003642 | 2.070552 | 1975.497270 |
+| 4  | 0.002745 | 1.230456 | 1048.335238 |
+| 8  | 0.000928 | 0.565957 | 551.328802  |
+| 16 | 0.000285 | 0.327240 | 304.160492  |
+| 32 | 0.000230 | 0.106617 | 171.271397  |
+| 64 | 0.000136 | 0.097750 | 63.154963   |
+
+## 4.5 Solution
+See figure \ref{errors} for the log-log scaled plot for percentage errors vs DARTS.
+![\label{errors}](error.png)
+
+## 4.6 Solution
+See figure \ref{time} for the plot for time vs cores.
+![\label{time}](time.png)
+
+See figure \ref{time_log} for the semilog-plot for time vs cores along with the ideal line.
+![\label{time_log}](time_log_ideal.png)
+
