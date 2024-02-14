@@ -15,15 +15,50 @@ These are highly relevant to MPI grammar, so first do section 3 & 4.
 
 ## 1.3
 
+Exercise 1.21: We need to check now if we are on the edge of the whole system and perform the edge cases laid out on the previous page of the the textbook  
+
+    MPI_Comm_rank(MPI_COMM_WORLD,&myTaskID);
+    MPI_Comm_size(MPI_COMM_WORLD,&nTasks);
+
+    if (myTaskID==0){
+        leftproc = MPI_PROC_NULL;
+        a[0] = (b[0]+b[i])/2
+    }
+    else{
+        leftproc = myTaskID-1;
+    }
+
+    if (myTaskID==nTasks-1){
+        rightproc = MPI_PROC_NULL;
+        a[LocalProblemSize-1] = (b[LocalProblemSize-1] - [LocalProblemSize-2])/2 
+    }
+    else{
+        rightproc = myTaskID+1;
+    }
+    MPI_Sendrecv( &b[LocalProblemSize-1], &bfromleft, rightproc);  
+    MPI_Sendrecv( &b[0], &bfromright, leftproc);
+
 ## 1.4
 
-## 1.5
+Exercise 1.22: We can perform the action on the the first iteration while we are waiting to make sure the data transfered correctly to the next thread 
 
+MPI_Isend(&y[N],&sendhandle);
+MPI_Ireceive(&y[0],&recvhandle);
+  // for i in rang localN
+ // Perform here the computation y_i = y_i + x_i-1
+MPI_Wait(sendhandle); Wait(recvhandle);
+    y[local_0] = y[local_0] + x[n-1]
+
+## 1.5
 
 ## 1.6 
 
 
 # Part 2
+
+## 2.1 - 2.5 Solution
+
+All have been completed to properly run on the HPCC
 
 # Part 3
 
