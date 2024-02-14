@@ -213,7 +213,7 @@ See figure below for the semilog-plot for time vs cores along with the ideal lin
 
 The parallel scaling efficiency can be calculated as:
 
-$E = \frac{T_{1}}{P*T_{P}$
+$E = \frac{T_{1}}{P*T_{P}}$
 
 where $T_1$ is the time taken by one processor and $T_P$ is the time taken by $P$ processors. 
 
