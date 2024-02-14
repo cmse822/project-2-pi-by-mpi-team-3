@@ -204,13 +204,17 @@ which does not always evenly divide our fixed $100$ rounds to various cores, esp
 
 ## 4.6 Solution
 See figure below for the plot for time vs cores.
+
 <img src="time_normal.png" alt="time" width="50%"/>
 
 See figure below for the semilog-plot for time vs cores along with the ideal line.
+
 <img src="time_log_ideal.png" alt="time_log" width="50%"/>
 
 The parallel scaling efficiency can be calculated as:
+
 $E = \frac{T_{1}}{P*T_{P}$
+
 where $T_1$ is the time taken by one processor and $T_P$ is the time taken by $P$ processors. 
 
 The following table shows the efficiencies for each case:
@@ -226,6 +230,7 @@ The following table shows the efficiencies for each case:
 | 64 | 0.469555 | 0.651328 | 0.951239 |
 
 The figure below can be plotted using the data above
+
 <img src="efficiency.png" alt="time" width="50%"/>
 
 The efficiency is lower than $1$ for all number of cores. The parallel performance does vary somewhat with dart count. This variation may be due to the same reason in 4.5 i.e. the rounds not being divided equally between the cores for different total cores. 
