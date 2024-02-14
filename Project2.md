@@ -1,10 +1,16 @@
 # Part 1 
 
 ## 1.1
+
+Exercise 2.18: 
+
 1. The provided code fragment utilizes the variable i in both sequential and parallel loops without clearly defining its scope. Within OpenMP, a loop's variable automatically becomes private to each thread when used in parallel execution. Nonetheless, if i is defined outside the scope of the parallel region—as suggested by the code excerpt—this may result in conflicting data access
 2. The snippet immediately employs the #pragma omp parallel for construct without confirming that the a, b, and c variables are initialized and ready for use in the parallel section.
 
 ## 1.2
+
+Exercise 2.19: 
+
 **False Sharing**: False sharing occurs when multiple threads on different processors modify variables that reside on the same cache line, even though they are not actually sharing any data. Cache lines are the smallest unit of memory that can be transferred between the main memory and the cache. When one thread modifies a variable, the cache line containing that variable is marked as dirty, prompting an update across all caches to maintain coherence. If another thread modifies a different variable that happens to be on the same cache line, it causes the cache line to be invalidated and reloaded, even though the two variables are unrelated.
 
 In the case of a chunk size of 1, adjacent iterations of the loop, which are likely modifying adjacent elements of array a, are distributed across different threads. If elements of a are stored in contiguous memory locations (which is typically the case), iterations assigned to different threads will often work on elements of a that reside on the same cache line. This will result in severe performance drop.
@@ -15,7 +21,9 @@ These are highly relevant to MPI grammar, so first do section 3 & 4.
 
 ## 1.3
 
-Exercise 1.21: We need to check now if we are on the edge of the whole system and perform the edge cases laid out on the previous page of the the textbook  
+Exercise 2.21: 
+
+We need to check now if we are on the edge of the whole system and perform the edge cases laid out on the previous page of the the textbook  
 
     MPI_Comm_rank(MPI_COMM_WORLD,&myTaskID);
     MPI_Comm_size(MPI_COMM_WORLD,&nTasks);
@@ -40,7 +48,7 @@ Exercise 1.21: We need to check now if we are on the edge of the whole system an
 
 ## 1.4
 
-Exercise 1.22: We can perform the action on the the first iteration while we are waiting to make sure the data transfered correctly to the next thread 
+Exercise 2.22: We can perform the action on the the first iteration while we are waiting to make sure the data transfered correctly to the next thread 
 
 MPI_Isend(&y[N],&sendhandle);
 MPI_Ireceive(&y[0],&recvhandle);
@@ -51,8 +59,15 @@ MPI_Wait(sendhandle); Wait(recvhandle);
 
 ## 1.5
 
+Exercise 2.23: 
+
+The main savings of a hybrid system is that it allows all processors to access the cache at certain levels which decreases the latenecy when multiple processors need to be using the same data. However, these conflicting reads could cause an overall decrease in bandwidth as they msut wait on one another if they are trying to access the same part of cache. 
+
 ## 1.6 
 
+Exercise 2.27: 
+
+You can only really "gain" in latency hiding when your computations time is longer than your communication time. When the computation time is less than the commincation time the processors will still have to wait for communication to finish and therefore latenecy hiding does not really do anything to increase performance. 
 
 # Part 2
 
