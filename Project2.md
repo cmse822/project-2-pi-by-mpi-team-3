@@ -190,6 +190,7 @@ Number of darts and ranks were changed while keeping track of pi and runtimes. A
 
 ## 4.5 Solution
 See figure below for the log-log scaled plot for percentage errors vs DARTS.
+
 <img src="error.png" alt="errors" width="50%"/>
 
 The rate of convergence in a log-log plot corresponds to the slope of the curve, so we expect negative slopes of these curves. 
@@ -204,13 +205,15 @@ which does not always evenly divide our fixed $100$ rounds to various cores, esp
 
 ## 4.6 Solution
 See figure below for the plot for time vs cores.
+
 <img src="time_normal.png" alt="time" width="50%"/>
 
 See figure below for the semilog-plot for time vs cores along with the ideal line.
+
 <img src="time_log_ideal.png" alt="time_log" width="50%"/>
 
 The parallel scaling efficiency can be calculated as:
-$E = \frac{T_{1}}{P*T_{P}$
+$E = \frac{T_{1}}{P*T_{P}}$
 where $T_1$ is the time taken by one processor and $T_P$ is the time taken by $P$ processors. 
 
 The following table shows the efficiencies for each case:
@@ -226,6 +229,16 @@ The following table shows the efficiencies for each case:
 | 64 | 0.469555 | 0.651328 | 0.951239 |
 
 The figure below can be plotted using the data above
+
 <img src="efficiency.png" alt="time" width="50%"/>
 
 The efficiency is lower than $1$ for all number of cores. The parallel performance does vary somewhat with dart count. This variation may be due to the same reason in 4.5 i.e. the rounds not being divided equally between the cores for different total cores. 
+
+## 4.7 Solution
+
+We modified the slurm script to use multiple nodes using `--nodes=4` and specified the number of tasks per node using `--ntasks-per-node=$((total_cores / 4))`.
+The figure below gives the time for running on multiple nodes vs time for running on a single node. 
+
+<img src="diff_nodes.png" alt="time" width="50%"/>
+
+Compared to single node, the runtime has increased owing to the communication overhead between various nodes. The variation is more pronounced for low number of DARTS and less noticeable for high DARTS cases. 
