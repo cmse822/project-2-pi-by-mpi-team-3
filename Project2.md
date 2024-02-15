@@ -25,6 +25,7 @@ Exercise 2.21:
 
 We need to check now if we are on the edge of the whole system and perform the edge cases laid out on the previous page of the the textbook  
 
+```
     MPI_Comm_rank(MPI_COMM_WORLD,&myTaskID);
     MPI_Comm_size(MPI_COMM_WORLD,&nTasks);
 
@@ -46,9 +47,13 @@ We need to check now if we are on the edge of the whole system and perform the e
     MPI_Sendrecv( &b[LocalProblemSize-1], &bfromleft, rightproc);  
     MPI_Sendrecv( &b[0], &bfromright, leftproc);
 
+```
+
 ## 1.4
 
 Exercise 2.22: We can perform the action on the the first iteration while we are waiting to make sure the data transfered correctly to the next thread 
+
+```
 
 MPI_Isend(&y[N],&sendhandle);
 MPI_Ireceive(&y[0],&recvhandle);
@@ -56,6 +61,8 @@ MPI_Ireceive(&y[0],&recvhandle);
  // Perform here the computation y_i = y_i + x_i-1
 MPI_Wait(sendhandle); Wait(recvhandle);
     y[local_0] = y[local_0] + x[n-1]
+
+```
 
 ## 1.5
 
