@@ -71,7 +71,7 @@ if (rank == 0){
 
 Exercise 2.23: 
 
-The main savings of a hybrid system is that it allows all processors to access the cache at certain levels which decreases the latenecy when multiple processors need to be using the same data. However, these conflicting reads could cause an overall decrease in bandwidth as they msut wait on one another if they are trying to access the same part of cache. 
+The main savings of a hybrid system is that it allows all processors to access the cache at certain levels which decreases the latenecy when multiple processors need to be using the same data. However, these conflicting reads could cause an overall decrease in bandwidth as they must wait on one another if they are trying to access the same part of cache. Therefore, the cost savings of a hybrid model over the purely distributed model are the bandwidth consumption and latency, so the hybrid model is advantageous in the limited bandwidth scenarios.   
 
 ## 1.6 
 
