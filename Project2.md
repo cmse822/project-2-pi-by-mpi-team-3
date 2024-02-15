@@ -51,7 +51,7 @@ We need to check now if we are on the edge of the whole system and perform the e
 
 ## 1.4
 
-Exercise 2.22: We can perform the action on the the first iteration while we are waiting to make sure the data transfered correctly to the next thread 
+Exercise 2.22: We can perform the action on the the first iteration while we are waiting to make sure the data transfered correctly to the next thread. The non-blocking method can offer better performance by reducing idle time and overlapping communication with computation, but these benefits can also increase the code complexity and require some careful management of cummunication operations and data buffers.
 
 ```
 
@@ -60,8 +60,11 @@ MPI_Ireceive(&y[0],&recvhandle);
   // for i in rang localN
  // Perform here the computation y_i = y_i + x_i-1
 MPI_Wait(sendhandle); Wait(recvhandle);
+if (rank == 0){
     y[local_0] = y[local_0] + x[n-1]
-
+}else{
+    y[local_0] = y[local_0] + x[rank]
+}
 ```
 
 ## 1.5
