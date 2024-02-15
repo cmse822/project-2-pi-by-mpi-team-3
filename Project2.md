@@ -109,7 +109,6 @@ We see 12 total "Hello, World!" (when we feed in 4 ranks). The "Hello, World" be
 
 Check **ppbook.c**
 
-TBD: run on hpcc
 
 ### Exercise 2.4
 
