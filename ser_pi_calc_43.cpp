@@ -19,27 +19,30 @@ void srandom (unsigned seed);
 double dboard (int darts);
 
 #define ROUNDS 100    	/* number of times "darts" is iterated */
-const int long DARTS = 1000000;
+const int long DARTS = 1000000; // Defining DARTS as long int 
 
 int main(int argc, char *argv[]){
 
-int numtasks, rank; 
-double start_time, end_time, elapsed, max_elapsed; 
+int numtasks, rank; // numtasks is the # of processors, rank is the # of current processor
+double start_time, end_time, elapsed, max_elapsed; // variables for measuring time
 
 double pi;          	/* average of pi after "darts" is thrown */
 double avepi, sum_all_pi;       	/* average pi value for all iterations */
 int i, n;
 
+// Initializing MPI
 MPI_Init(&argc, &argv); 
 MPI_Comm_size(MPI_COMM_WORLD, &numtasks); 
 MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
+// Dividing all ROUNDS over total processors
 int count = ROUNDS / numtasks + ((ROUNDS % numtasks) > rank);
 
 printf("Starting pi calculation using dartboard algorithm...\n");
 srandom (rank);            /* seed the random number generator */
 avepi = 0;
 
+// Using MPI_Barrier so that all processors get their results at the same time
 MPI_Barrier(MPI_COMM_WORLD);
 start_time = MPI_Wtime();
 
@@ -54,9 +57,12 @@ for (i = 0; i < count; i++) {
 end_time = MPI_Wtime();
 elapsed = end_time - start_time;
 
+// MPI_reduce for measured time from all ranks --> choosing the max time to report as runtime
 MPI_Reduce(&elapsed, &max_elapsed, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD); 
+// MPI_reduce for all averaged pi's --> summing them up here to average further
 MPI_Reduce(&avepi, &sum_all_pi, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 
+// Printing the results at the last rank
 if (rank == 0) {
     printf("Calculated pi = %10.13f \n", sum_all_pi / numtasks);
     printf("Elapsed time = %f", max_elapsed);
