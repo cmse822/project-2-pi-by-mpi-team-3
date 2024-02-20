@@ -241,7 +241,8 @@ The figure below can be plotted using the data above
 
 <img src="efficiency.png" alt="time" width="50%"/>
 
-The efficiency is lower than $1$ for all number of cores. The parallel performance does vary somewhat with dart count. This variation may be due to the same reason in 4.5 i.e. the rounds not being divided equally between the cores for different total cores. 
+The efficiency is lower than $1$ for all number of cores. The parallel performance does vary somewhat with dart count. This variation is due to the different communication overhead. For 1E3, the overhead is high which reduce the scaling efficiency, followed by the overhead in 1E6 (leading to a better efficiency). At 1E9, the communication overhead is much lesser giving it a high scaling efficiency. 
+
 
 ## 4.7 Solution
 
