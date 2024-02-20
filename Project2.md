@@ -178,24 +178,24 @@ Number of darts and ranks were changed while keeping track of pi and runtimes. A
 ### Computed values of pi
 |    | 1.00E+03    | 1.00E+06    | 1.00E+09    |
 | -- | ----------- | ----------- | ----------- |
-| 1  | 3.143760000 | 3.141744840 | 3.141590588 |
+| 1  | 3.143760000 | 3.141744840 | 3.141585937 |
 | 2  | 3.143440000 | 3.142053600 | 3.141594685 |
 | 4  | 3.141960000 | 3.141928240 | 3.141585937 |
 | 8  | 3.147217949 | 3.141479949 | 3.141572884 |
 | 16 | 3.139291667 | 3.141478571 | 3.141571213 |
-| 32 | 3.142177083 | 3.141581157 | 3.141581157 |
-| 64 | 3.140093750 | 3.141592581 | 3.141592581 |
+| 32 | 3.142177083 | 3.141301313 | 3.141581157 |
+| 64 | 3.140093750 | 3.141440719 | 3.141592581 |
 
 ### Runtimes for each
 |    | 1.00E+03 | 1.00E+06 | 1.00E+09    |
 | -- | -------- | -------- | ----------- |
-| 1  | 0.002915 | 4.288132 | 3844.827927 |
-| 2  | 0.001496 | 2.191790 | 1975.497270 |
-| 4  | 0.000806 | 1.142942 | 1048.335238 |
-| 8  | 0.000526 | 0.606849 | 551.328802  |
-| 16 | 0.000400 | 0.321543 | 304.160492  |
-| 32 | 0.000176 | 0.174851 | 171.271397  |
-| 64 | 0.000097 | 0.102870 | 63.154963   |
+| 1  | 0.019890 | 4.241485 | 4102.233047 |
+| 2  | 0.010201 | 2.212073 | 2066.233047 |
+| 4  | 0.007714 | 1.170733 | 1060.976885 |
+| 8  | 0.005116 | 0.616521 | 553.390465  |
+| 16 | 0.002482 | 0.400400 | 297.989038  |
+| 32 | 0.001142 | 0.215966 | 165.672345  |
+| 64 | 0.000561 | 0.102118 | 71.254693   |
 
 ## 4.5 Solution
 See figure below for the log-log scaled plot for percentage errors vs DARTS.
@@ -204,9 +204,9 @@ See figure below for the log-log scaled plot for percentage errors vs DARTS.
 
 The rate of convergence in a log-log plot corresponds to the slope of the curve, so we expect negative slopes of these curves. 
 
-For each processor core, the convergence rate is negative, as expected, although not first-order ($-0.5$). The convergence rate for all cores appears similar except for the case of $64$ cores.
+For each processor core, the convergence rate is negative, as expected, although not first-order ($-0.5$). The convergence rate for all cores appears similar except for the case of $64$ cores at 1E9 rounds.
 
-The error or convergence should ideally not vary with the number of processors, however, we see slight changes in the our convergence rates / errors. This can be due to various reasons but the most likely is the parallelization strategy used. For each number of processors, we are dividing our rounds using 
+The error or convergence should ideally not vary with the number of processors, however, we see slight changes in our convergence rates and errors. This can be due to various reasons but the most likely is the parallelization strategy used. For each number of processors, we are dividing our rounds using 
 
 count = ROUNDS / numtasks + ((ROUNDS % numtasks) > rank)
 
@@ -230,12 +230,12 @@ The following table shows the efficiencies for each case:
 |    | 1.00E+03 | 1.00E+06 | 1.00E+09 |
 | -- | -------- | -------- | -------- |
 | 1  | 1.000000 | 1.000000 | 1.000000 |
-| 2  | 0.974265 | 0.978226 | 0.973129 |
-| 4  | 0.904156 | 0.937959 | 0.916889 |
-| 8  | 0.692728 | 0.883278 | 0.871718 |
-| 16 | 0.455469 | 0.833507 | 0.790049 |
-| 32 | 0.517578 | 0.766390 | 0.701523 |
-| 64 | 0.469555 | 0.651328 | 0.951239 |
+| 2  | 0.974904 | 0.958713 | 0.992684 |
+| 4  | 0.644607 | 0.905733 | 0.966617 |
+| 8  | 0.485975 | 0.859964 | 0.926614 |
+| 16 | 0.500856 | 0.662070 | 0.860399 |
+| 32 | 0.544418 | 0.613737 | 0.773785 |
+| 64 | 0.554274 | 0.648986 | 0.899553 |
 
 The figure below can be plotted using the data above
 
